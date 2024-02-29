@@ -1,0 +1,19 @@
+
+apply plugin: 'application'
+
+mainClassName = 'Main'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'mysql:mysql-connector-java:8.0.23'
+
+    implementation 'org.apache.poi:poi:5.2.2'
+    implementation 'org.apache.poi:poi-ooxml:5.2.2'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
