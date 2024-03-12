@@ -5,11 +5,13 @@ public class Lab1 {
         Scanner scanner = new Scanner(System.in);
 
         MathOperations math = new MathOperations();
-        Database db = new Database();
+        Database db = new Database(1);
 
 
         while (true) {
-            System.out.println("Выбрать опцию: 1. Вывести все таблицы из MySQL 2.Создать таблицу в MySQL 3. Сложение 4. Вычитание 5. Умножение 6. Деление 7. Остаток 8. Модуль 9. Возвести в степень второго числа  10. Сохранить все данные в Excel 11. Выйти");
+
+            System.out.println("Выбрать опцию:\n 1. Вывести все таблицы из MySQL\n 2. Создать таблицу в MySQL\n 3. Сложение\n 4. Вычитание\n 5. Умножение\n 6. Деление\n 7. Остаток\n 8. Модуль\n 9. Возвести в степень второго числа\n 10. Сохранить все данные в Excel\n 11. Выйти");
+
             int choice = scanner.nextInt();
             if (choice == 11) break;
             double num1 = 0;

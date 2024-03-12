@@ -10,9 +10,9 @@ public class Main {
             case 1:
                 Lab1.lab1();
                 break;
-//            case 2:
-//                Lab2.Lab2();
-//                break;
+            case 2:
+                Lab2.lab2();
+                break;
 //            case 3:
 //                Lab3.run();
 //                break;

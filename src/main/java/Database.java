@@ -4,10 +4,14 @@ import java.io.FileOutputStream;
 import java.sql.*;
 
 public class Database {
-    private static Connection connect() {
+    int numOfDb;
+    public Database(int numOfDb) {
+        this.numOfDb = numOfDb;
+    }
+    private Connection connect() {
         Connection conn = null;
         try {
-            String url = "jdbc:mysql://localhost:3306/Lab1";
+            String url = "jdbc:mysql://localhost:3306/Lab"+ this.numOfDb;
             String user = "root";
             String password = "12345678";
 
@@ -44,6 +48,21 @@ public class Database {
             System.out.println(e.getMessage());
         }
     }
+    public void insertStringData(String tableName, String string1, String string2, int length1, int length2, String concatenated, String isEqual) {
+        String sql = "INSERT INTO " + tableName + " (string1, string2, length1, length2, concatenated, isEqual) VALUES(?,?,?,?,?,?)";
+        try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, string1);
+            pstmt.setString(2, string2);
+            pstmt.setInt(3, length1);
+            pstmt.setInt(4, length2);
+            pstmt.setString(5, concatenated);
+            pstmt.setString(6, isEqual);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void showTables() {
         String sql = "SHOW TABLES";
 
@@ -70,7 +89,15 @@ public class Database {
             System.out.println("Ошибка при создании таблицы: " + e.getMessage());
         }
     }
-
+    public void createStringTable(String tableName) {
+        String sql = "CREATE TABLE IF NOT EXISTS " + tableName + " (id INT AUTO_INCREMENT PRIMARY KEY, string1 VARCHAR(255), string2 VARCHAR(255), length1 INT, length2 INT, concatenated VARCHAR(510), isEqual VARCHAR(255))";
+        try (Connection conn = this.connect(); Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(sql);
+            System.out.println("Таблица " + tableName + " успешно создана.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public void exportToExcel(String tableNameForExport) {
         String sql = "SELECT * FROM " + tableNameForExport;
 
